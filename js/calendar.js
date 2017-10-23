@@ -27,7 +27,7 @@ function drawCalendar2(id, year, month) {
 			}
 		}
 	
-		for(var  i = DNlast; i < 7; i++) calendar += '<td>&nbsp;';
+//		for(var  i = DNlast; i < 6; i++) calendar += '<td>&nbsp;';
 	
 		document.querySelector('#'+id+' tbody').innerHTML = calendar;
 		document.querySelector('#'+id+' thead td:nth-child(2)').innerHTML = month[D.getMonth()] +' '+ D.getFullYear();
@@ -36,11 +36,11 @@ function drawCalendar2(id, year, month) {
 		document.querySelector('#month').previousSibling.id = 'prev_month';
 		document.querySelector('#'+id+' thead td:nth-child(2)').dataset.month = D.getMonth();
 		document.querySelector('#'+id+' thead td:nth-child(2)').dataset.year = D.getFullYear();
-	
-		if (document.querySelectorAll('#'+id+' tbody tr').length < 6) { 
+/*	
+		if (document.querySelectorAll('#'+id+' tbody tr').length < 4) { 
 			document.querySelector('#'+id+' tbody').innerHTML += '<tr><td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;';
 		}
-
+*/
 	// переключатель минус месяц
 	document.querySelector('#prev_month').onclick = function() {
 
