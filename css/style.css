@@ -1,100 +1,150 @@
-table {
-  width: 1300px;
-  margin: 0 auto;
+header {
+	height: 50px;
+	background: whitesmoke;
 }
 
-thead td {
-  text-align: center;
-  font-size: 20px;
-  text-transform: uppercase;
+#request {
+	display: block;
+	float: left;
+	height: 50px;
+	width: 250px;
+	line-height: 50px;
 }
 
-thead #prev_month,
-thead #next_month {
-  font-size: 60px;
-  font-weight: 800;
-  color: green;
-  cursor: pointer;
+nav {
+	display: block;
+	float: left;
+	height: 50;
+	line-height: 50px;
+	margin-left: 150px;
+	margin-right: 150px;
+	font-size: 18px;
+	text-transform: uppercase;
 }
 
-tbody td {
-  height: 120px;
-  vertical-align: top;
-  text-align: right;
-  font-size: 20px;
-  border: 2px solid rgb(0, 167, 0);
-  border-radius: 5px;
-  cursor: pointer;
-  background: rgb(234, 248, 234);
+#search {
+	display: block;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	margin-right: 0;
 }
 
-.monthDate:hover {
-  background: rgb(189, 245, 189);
+ul {
+	margin: 0;
 }
 
-.myList {
-  width: 170px;
-  margin-left: -40px;
-  cursor: auto;
+nav ul li {
+	display: inline;
+	margin-right: 50px;
 }
 
-.myList li {
-  position: relative;  
-  margin-right: -7px;
-  margin-bottom: 2px;
-  padding-left: 10px;
-  text-align: left;
-  list-style-type: none;
-  background-color: rgb(206, 237, 255);
-  border-radius: 4px;
+/* ------- map ---------------- */
+
+#content {
+	position: relative;
+	top: 10px;
+	width: 1210px;
 }
 
-.myList span {
-  position: absolute;
-  right: 0;
-  width: 20px;
-  margin-left: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: red;
-  cursor: pointer;
+#map {
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	height: 400px;
 }
 
-form {
-  width: 800px;
-  margin-left: 30%;
-  font-size: 18px;
+#preference_star {
+	position: absolute;
+	top: 5px;
+  right: 165px;
+  width: 40px;
+  height: 40px;
+	-webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	background: gold;
+	cursor: pointer;
+	z-index: 999999;
 }
 
-#code {
-  width: 350px;
-  float: left;
+#history {
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin-right: 10px;
+	padding: 20px;
+	background: whitesmoke;
 }
 
-/*---------стилизация превью--------------*/
-
-#preview {
-  width: 950px;
-  height: 480px;
-  float: left;
+#weather {
+	float: left;
+	width: 490px;
+	height: 200px;
+	margin-right: 10px;
+	padding: 20px;
+	background: whitesmoke;
 }
 
-table#previewCalendar {
-  width: 700px;
-  font-size: 14px;
+#weather ul {
+	list-style-type: none;
+	font-size: 30px;
 }
 
-#previewCalendar thead td {
-  height: 20px;
+#preference {
+	float: left;
+	width: 380px;
+	height: 200px;
+	padding: 20px;
+	background: whitesmoke;
 }
 
-#previewCalendar tbody td {
-  height: 60px;
+#preference > li {
+	position: relative;
+	font-size: 18px;
+  padding-right: 25px;
+  padding-left: 45px;
+	list-style-type: none;
+	cursor: pointer;
 }
 
-#preview_prev_month,
-#preview_next_month {
+#preference > li:before {
+  content: "\2605";
+  margin-right: 20px;
+  margin-left: -45px;
   font-size: 30px;
+  color: gold;
 }
 
+#preference .remove {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	right: 0;
+	bottom: 10%;
+	color: white;
+	text-align: center;
+	background: red;
+}
+
+#history > li {
+	font-size: 18px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+/*------------- about -------------*/
+
+#content > p {
+	font-size: 24px;
+	line-height: 30px;
+}
+
+#content > img {
+	width: 200px;
+	height: 200px;
+	margin-left: 150px;
+	margin-top: -130px;
+	-webkit-clip-path: circle(50% at 50% 50%);
+	clip-path: circle(50% at 50% 50%);
+}
 

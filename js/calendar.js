@@ -27,7 +27,7 @@ function drawCalendar2(id, year, month) {
 			}
 		}
 	
-//		for(var  i = DNlast; i < 6; i++) calendar += '<td>&nbsp;';
+		for(var  i = DNlast; i < 6; i++) calendar += '<td>&nbsp;';
 	
 		document.querySelector('#'+id+' tbody').innerHTML = calendar;
 		document.querySelector('#'+id+' thead td:nth-child(2)').innerHTML = month[D.getMonth()] +' '+ D.getFullYear();

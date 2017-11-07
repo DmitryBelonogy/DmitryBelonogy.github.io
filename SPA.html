@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SPA</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+	<header>
+		<form id="request">
+			<input id="xhr" type="radio" name="request_type" value="XHR" checked><label for="xhr"> XHR </label> ||<input id="fetch" type="radio" name="request_type" value="fetch"><label for="fetch"> FETCH </label>
+		</form>
+		<nav>
+			<ul>
+				<li><a href="#">О сайте</a></li>
+				<li><a href="#map">Карта</a></li>
+			</ul>
+		</nav>
+		<form id="search">
+			<input id="sityName" type="text" name="text">
+			<button id="search_btn">Поиск</button>
+		</form>
+	</header>
+	<content>
+		<div id="content">
+
+		</div>	
+	</content>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript" src="js/about.js"></script>
+
+	<script type="text/javascript" src="js/createMap.js"></script>
+	<script type="text/javascript" src="js/request.js"></script>
+	<script type="text/javascript" src="js/getLocationCoordinates.js"></script>
+	<script type="text/javascript" src="js/LocalStorage.js"></script>
+	<script type="text/javascript" src="js/weather.js"></script>
+	
+	<script type="text/javascript" src="js/addHistory.js"></script>
+	<script type="text/javascript" src="js/addPreferences.js"></script>
+	<script type="text/javascript" src="js/clickPreference.js"></script>
+	<script type="text/javascript" src="js/clickHistory.js"></script>
+	<script type="text/javascript" src="js/router.js"></script>
+</body>
+</html>
