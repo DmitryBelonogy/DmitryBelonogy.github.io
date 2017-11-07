@@ -10,6 +10,7 @@ let getForecastByLatLng = (location) => {
 		.then(r => r.json())
 		.then(data => { 
 			temp.innerHTML = Math.round(data.currently.temperature);
+			console.log(data.currently.temperature);
 			summary.innerHTML = data.currently.summary;
 			precipProbability.innerHTML = 'Вероятность осадков ' + data.currently.precipProbability * 100 + '%';
 			pressure.innerHTML = 'Атмосферное давление ' + data.currently.pressure + 'Па';
