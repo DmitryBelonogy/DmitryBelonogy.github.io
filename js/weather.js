@@ -6,10 +6,12 @@ let getForecastByLatLng = (location) => {
 			precipProbability = document.getElementById('precipProbability'),
 			pressure = document.getElementById('pressure'),
 			humidity = document.getElementById('humidity');
+			fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si').then(r => r.json()).then(console.log);
+/*			
 	fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si')
   	.then((req) => {
   		console.log(req);
-//  		req.json()
+  		req.json()
   	})
 		.then((data) => {
 			console.log(data);
@@ -21,5 +23,6 @@ let getForecastByLatLng = (location) => {
 //			pressure.innerHTML = 'Атмосферное давление ' + obj.currently.pressure + 'Па';
 //			humidity.innerHTML = 'Влажность ' + obj.currently.humidity * 100 + '%';			
 		});
+*/		
 };
 
