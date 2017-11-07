@@ -9,6 +9,7 @@ let getForecastByLatLng = (location) => {
 	fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si')
   	.then((req) => req.json())
 		.then((data) => {
+			console.log(data);
 			let obj = JSON.parse(data.body);
 			let	temperature = Math.round((obj.currently.temperature - 32) * 5 / 9);
 			temp.innerHTML = temperature;
