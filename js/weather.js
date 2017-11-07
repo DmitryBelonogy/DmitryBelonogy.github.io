@@ -9,7 +9,7 @@ let getForecastByLatLng = (location) => {
 	fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si')
   	.then((req) => {
   		console.log(req);
-  		req.json()
+//  		req.json()
   	})
 		.then((data) => {
 			console.log(data);
