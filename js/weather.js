@@ -10,13 +10,13 @@ let getForecastByLatLng = (location) => {
   	.then((req) => req.json())
 		.then((data) => {
 			console.log(data);
-			let obj = JSON.parse(data.body);
-			let	temperature = Math.round((obj.currently.temperature - 32) * 5 / 9);
-			temp.innerHTML = temperature;
-			summary.innerHTML = obj.currently.summary;
-			precipProbability.innerHTML = 'Вероятность осадков ' + obj.currently.precipProbability * 100 + '%';
-			pressure.innerHTML = 'Атмосферное давление ' + obj.currently.pressure + 'Па';
-			humidity.innerHTML = 'Влажность ' + obj.currently.humidity * 100 + '%';			
+//			let obj = JSON.parse(data.body);
+//			let	temperature = Math.round((obj.currently.temperature - 32) * 5 / 9);
+//			temp.innerHTML = temperature;
+//			summary.innerHTML = obj.currently.summary;
+//			precipProbability.innerHTML = 'Вероятность осадков ' + obj.currently.precipProbability * 100 + '%';
+//			pressure.innerHTML = 'Атмосферное давление ' + obj.currently.pressure + 'Па';
+//			humidity.innerHTML = 'Влажность ' + obj.currently.humidity * 100 + '%';			
 		});
 };
 
