@@ -28,7 +28,6 @@ function getLocationName(locationCoordinates) {
 		})
 		.then((data) => {
 			locationName = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[2].long_name;
-			console.log('done');
 			addPreferenceList (locationName);
 		});
 }

@@ -10,6 +10,12 @@ function getCurentPosition() {
 			point[0] = response.position.latitude;
 			point[1] = response.position.longitude;
 			ymaps.ready(init);
+      clickPreference();
+      addPreferences();
+      removePreferenses();
+      clickHistory();
+      searchSity();
+
 		};
 		x.send(null);
 	} else if (requestType === 'fetch') {
@@ -21,6 +27,12 @@ function getCurentPosition() {
 				point[0] = obj.position.latitude;
 				point[1] = obj.position.longitude;
 				ymaps.ready(init);
+        clickPreference();
+        addPreferences();
+        removePreferenses();
+        clickHistory();
+        searchSity();
+				
 			});
 	}
 }

@@ -12,11 +12,6 @@ let routs = [
                     getToLocalStorage('history');
                     getToLocalStorage('preference');
                     getCurentPosition();
-                    clickPreference();
-                    addPreferences();
-                    removePreferenses();
-                    clickHistory();
-                    searchSity();
                    }
   }
 ];
