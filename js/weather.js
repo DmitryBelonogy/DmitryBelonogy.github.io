@@ -6,7 +6,9 @@ let getForecastByLatLng = (location) => {
 			precipProbability = document.getElementById('precipProbability'),
 			pressure = document.getElementById('pressure'),
 			humidity = document.getElementById('humidity');
-			fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si').then(r => r.json()).then(console.log);
+			fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si')
+			.then(r => r.json())
+			.then(data => console.log(data));
 /*			
 	fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d113af5f82393ef553f48314ae9f42e8/53.890838,27.5372046?lang=ru&units=si')
   	.then((req) => {
