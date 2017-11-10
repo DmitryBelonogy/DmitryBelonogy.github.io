@@ -2,6 +2,8 @@ let myMap;
 
 let center;
 
+let curentHref = window.location.href;
+
 function init () {
   // Создание экземпляра карты и его привязка к контейнеру с
   // заданным id ("map").
@@ -17,9 +19,20 @@ function init () {
     duration: 1500
   });
 
+  function changeURL() {
+    if(!curentHref.includes('#map') ) {
+      curentHref += '#map';
+    }
+    let text = '&' + center.join(',');
+    let modifyHref = curentHref + text;
+    window.location.href = modifyHref;
+  }
+
   var showCenter = () => {
     center = myMap.getCenter();
-    getForecastByLatLng(center);
+    point = center;
+    getForecastByLatLng(center);    
+    changeURL();
     return center;
   };
 

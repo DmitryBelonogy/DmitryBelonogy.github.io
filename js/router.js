@@ -2,12 +2,16 @@ let routs = [
   {
     name: 'about',
     match: '',
-    onEnter: () => compileTemplate(tpl_about)(document.querySelector('#content'), data_about)
+    onEnter: () => {
+                    document.querySelector('#content').innerHTML = '';
+                    compileTemplate(tpl_about)(document.querySelector('#content'), data_about);
+                  }
   },
   {
     name: 'map',
     match: 'map',
     onEnter: () => {
+                    document.querySelector('#content').innerHTML = '';
                     compileTemplate(tpl_map)(document.querySelector('#content'), data_map);
                     getToLocalStorage('history');
                     getToLocalStorage('preference');
@@ -22,11 +26,20 @@ function Router(routs) {
 
   //обработчик URL
   function handleUrl(url) {
-   
     let curentURL = url;
     if(!prevURL.includes('#') && !curentURL.includes('#')) {
       prevURL += '#';
       curentURL += '#';
+    }
+
+    if (curentHref.indexOf('&') !== -1) {    
+      let coordinate = curentHref.split('&')[1].split(',');
+      point[0] = +coordinate[0];
+      point[1] = +coordinate[1];
+    }
+
+    if (curentURL.split('&').shift() === prevURL.split('&').shift() && curentURL.split('&').shift().includes('map')) {
+      return;
     }
     
     curentRout = findRout(curentURL);
@@ -39,6 +52,7 @@ function Router(routs) {
   }
 
   function findRout(url) {
+    url = url.split('&').shift();
     url = url.split('#').pop();
     return routs.find((rout) => {
       if (typeof rout.match === 'string') {
