@@ -7,7 +7,6 @@ function setToLocalStorage(idElement) {
 	localStorage.setItem(idLocalStorage, el.innerHTML);
 }
 
-
 function getToLocalStorage (idElement) {
 
 	let id = idElement;

@@ -23,12 +23,20 @@ function init () {
     if(!curentHref.includes('#map') ) {
       curentHref += '#map';
     }
-    let text = '&' + center.join(',');
-    let modifyHref = curentHref + text;
-    window.location.href = modifyHref;
+    if (curentHref.includes('&')) {
+      curentHref = curentHref.split('&').shift();
+      let text = '&' + center.join(',');
+      let modifyHref = curentHref + text;
+      window.location.href = modifyHref;
+    } else {
+      let text = '&' + center.join(',');
+      let modifyHref = curentHref + text;
+      window.location.href = modifyHref;
+    }
+    
   }
 
-  var showCenter = () => {
+  let showCenter = () => {
     center = myMap.getCenter();
     point = center;
     getForecastByLatLng(center);    

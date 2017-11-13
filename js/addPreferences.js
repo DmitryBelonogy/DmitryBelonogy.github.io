@@ -1,5 +1,3 @@
-
-
 function addPreferences() {
 	let preferenceStar = document.getElementById('preference_star');
 	if (!preferenceStar) return;
