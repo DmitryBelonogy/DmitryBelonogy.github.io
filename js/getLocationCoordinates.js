@@ -15,8 +15,6 @@ function getLocationCoordinates(cityName) {
 		});
 }
 
-//getLocationCoordinates('Брест');
-
 let locationName;
 
 function getLocationName(locationCoordinates) {

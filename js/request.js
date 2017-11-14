@@ -1,4 +1,5 @@
 let point = [];
+console.log(point);
 function getCurentPosition() {
 	if (point[0] && point[1]) {
 		ymaps.ready(init);

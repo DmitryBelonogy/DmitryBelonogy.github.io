@@ -34,14 +34,25 @@ function Router(routs) {
       curentURL += '#map';
     }
 
+    if (curentURL.split('&').shift() === prevURL.split('&').shift() && curentURL.split('&').shift().includes('map')) {
+      return;
+    }
+
     if (curentHref.indexOf('&') !== -1) {
       if (curentHref.search(/&+[0-9]+[.]+[0-9]+[,]+[0-9]+[.]+[0-9]+/) !== -1) {
-        console.log(curentHref);
+        console.log(1);
         let coordinate = curentHref.split('&')[1].split(',');
         point[0] = +coordinate[0];
         point[1] = +coordinate[1];
-      } else if (curentHref.search(/&+[a-z]+/i)) {
-        console.log(curentHref);
+        let curentRout = findRout(curentURL);
+
+        let prevRout = findRout(prevURL);
+
+        curentRout.onEnter();
+
+        prevURL = curentURL;
+      } else if (curentHref.search(/&+[a-z]+ | &+[а-я]+/i)) {
+        console.log(2);
         let sity = curentHref.split('&').pop();
         let GOOGLE_API_KEY = 'AIzaSyDa7DCL2NO9KMPd9DYVk_u3u0wCbm0XXFY';
         console.log(sity);
@@ -51,24 +62,28 @@ function Router(routs) {
           })
           .then((data) => {
             let location = data.results[0].geometry.location;
+            console.log(location);
             point[0] = location.lat;
             point[1] = location.lng;
+            let curentRout = findRout(curentURL);
+
+            let prevRout = findRout(prevURL);
+
+            curentRout.onEnter();
+
+            prevURL = curentURL;
           });
       }
+    } else {
+      let curentRout = findRout(curentURL);
+
+      let prevRout = findRout(prevURL);
+
+      curentRout.onEnter();
+
+      prevURL = curentURL;
     }
-    
-    if (curentURL.split('&').shift() === prevURL.split('&').shift() && curentURL.split('&').shift().includes('map')) {
-      return;
-    }
-    
-    curentRout = findRout(curentURL);
-
-    prevRout = findRout(prevURL);
-
-    curentRout.onEnter();
-
-    prevURL = curentURL;
-    
+ 
   }
 
   function findRout(url) {

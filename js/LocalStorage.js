@@ -21,11 +21,4 @@ function getToLocalStorage (idElement) {
 
 	let data = localStorage.getItem(idLocalStorage);
 	el.innerHTML = data;
-/*
-	var promise = new Promise((resolve, reject) => {
-  	localStorage.getItem(idLocalStorage);
-	});
-
-	promise.then((data) => el.innerHTML = data);
-*/
 }
