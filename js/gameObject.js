@@ -164,21 +164,6 @@ if (game.html.indexOf('div') !== -1) {
     game.fieldType.style.height = n * 10 + 'px';
 }
 
-//add new 'bags'
-document.getElementById(game.id).addEventListener('click', (event) => {
-    console.log('click');
-    let x = event.offsetX;
-    let y = event.offsetY;
-    x = Math.floor(x/10);
-    y = Math.floor(y/10);
-    if (mas[x][y] === 1) {
-        mas[x][y] = 0;
-    } else if (mas[x][y] === 0) {
-        mas[x][y] = 1;
-    }
-    drawField();
-});
-
 function toLife() {
 
     for (let i = 0; i < m; i++) {
