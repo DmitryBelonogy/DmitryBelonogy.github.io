@@ -1,150 +1,30 @@
-header {
-	height: 50px;
-	background: whitesmoke;
-}
-
-#request {
-	display: block;
-	float: left;
-	height: 50px;
-	width: 250px;
-	line-height: 50px;
-}
-
-nav {
-	display: block;
-	float: left;
-	height: 50;
-	line-height: 50px;
-	margin-left: 150px;
-	margin-right: 150px;
-	font-size: 18px;
-	text-transform: uppercase;
-}
-
-#search {
-	display: block;
-	float: left;
-	height: 50px;
-	line-height: 50px;
-	margin-right: 0;
-}
-
-ul {
-	margin: 0;
-}
-
-nav ul li {
-	display: inline;
-	margin-right: 50px;
-}
-
-/* ------- map ---------------- */
-
-#content {
-	position: relative;
-	top: 10px;
-	width: 1210px;
-}
-
-#map {
-	width: 90%;
-	margin: 0 auto;
-	margin-bottom: 10px;
-	height: 400px;
-}
-
-#preference_star {
-	position: absolute;
-	top: 5px;
-  right: 165px;
-  width: 40px;
-  height: 40px;
-	-webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-	background: gold;
-	cursor: pointer;
-	z-index: 999999;
-}
-
-#history {
-	float: left;
-	width: 200px;
-	height: 200px;
+header > a {
+	display: inline-block;
+	padding: 10px 20px;
+	margin-bottom: 20px;
 	margin-right: 10px;
-	padding: 20px;
-	background: whitesmoke;
-}
-
-#weather {
-	float: left;
-	width: 490px;
-	height: 200px;
-	margin-right: 10px;
-	padding: 20px;
-	background: whitesmoke;
-}
-
-#weather ul {
-	list-style-type: none;
-	font-size: 30px;
-}
-
-#preference {
-	float: left;
-	width: 380px;
-	height: 200px;
-	padding: 20px;
-	background: whitesmoke;
-}
-
-#preference > li {
-	position: relative;
 	font-size: 18px;
-  padding-right: 25px;
-  padding-left: 45px;
-	list-style-type: none;
-	cursor: pointer;
-}
-
-#preference > li:before {
-  content: "\2605";
-  margin-right: 20px;
-  margin-left: -45px;
-  font-size: 30px;
-  color: gold;
-}
-
-#preference .remove {
-	width: 25px;
-	height: 25px;
-	position: absolute;
-	right: 0;
-	bottom: 10%;
-	color: white;
+	font-weight: bold;
+	text-decoration: none;
 	text-align: center;
-	background: red;
+	border: solid 1px black;
 }
 
-#history > li {
-	font-size: 18px;
-	list-style-type: none;
-	cursor: pointer;
+#canvas,
+#svg,
+#div {
+	border: 3px solid black;
 }
 
-/*------------- about -------------*/
-
-#content > p {
-	font-size: 24px;
-	line-height: 30px;
+#div {
+	position: relative;
 }
 
-#content > img {
-	width: 200px;
-	height: 200px;
-	margin-left: 150px;
-	margin-top: -130px;
-	-webkit-clip-path: circle(50% at 50% 50%);
-	clip-path: circle(50% at 50% 50%);
+i {
+	position: absolute;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	pointer-events: none;
+	background: black;
 }
-
