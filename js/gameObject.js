@@ -83,7 +83,35 @@ let routs = [
                 drawField();
             });
         }
-    }
+    },
+    {
+        name: 'text',
+        match: 'text',
+        onEnter: () => {
+            document.getElementById('content').innerHTML = '';
+            htmlType = '<pre id="pre"></pre>';
+            id = 'pre';
+            game = new Game(htmlType, id);
+            game.drawGameField();
+            drawField();
+            document.getElementById(game.id).addEventListener('click', (event) => {
+                let x = event.offsetX;
+                let y = event.offsetY;
+                let preWidth = event.target.clientWidth;
+                let preHeight = event.target.clientHeight;
+                let cellWidth = preWidth / mas[0].length;
+                let cellHeight = preHeight / mas.length;
+                x = Math.floor(x/cellWidth);
+                y = Math.floor(y/cellHeight);
+                if (mas[y][x] === 1) {
+                    mas[y][x] = 0;
+                } else if (mas[y][x] === 0) {
+                    mas[y][x] = 1;
+                }
+                drawField();
+            });
+        }
+    },
 ];
 
 class Game {
@@ -103,6 +131,9 @@ class Game {
         } else if (this.html.indexOf('div') !== -1) {
             document.getElementById('content').innerHTML = this.html;
             this.fieldType = document.getElementById('div');
+        } else if (this.html.indexOf('pre') !== -1) {
+            document.getElementById('content').innerHTML = this.html;
+            this.fieldType = document.getElementById('pre');
         }
     }
 }
@@ -172,6 +203,10 @@ function toLife() {
             mas[i][j] = 0;
         }
     }
+
+    if (game.html.indexOf('pre') !== -1) {
+        drawField();
+    }
 }
 
 toLife();
@@ -181,24 +216,42 @@ function drawField() {
 
     if (game.html.indexOf('canvas') !== -1) {
         game.ctx.clearRect(0, 0, m * 100, n * 100);
-    } else if (game.html.indexOf('svg') !== -1 || game.html.indexOf('div') !== -1) {
+    } else if (game.html.indexOf('svg') !== -1 || game.html.indexOf('div') !== -1 || game.html.indexOf('pre') !== -1) {
         game.fieldType.innerHTML = '';
     }
 
-    for (let i = 0; i < m; i++) {
-        if (!mas[i]) {
-            mas[i] = [0, 0];
-        }
-        for (let j = 0; j < n; j++) {
-            if (mas[i][j] === 1) {
-                if (game.html.indexOf('canvas') !== -1) {
-                    game.ctx.fillRect(i*10, j*10, 10, 10);
-                } else if (game.html.indexOf('svg') !== -1) {
-                    game.fieldType.innerHTML += `<rect x="${i * 10}" y="${j * 10}" width="10" height="10" fill="black"></rect>`;
-                } else if (game.html.indexOf('div') !== -1) {
-                    game.fieldType.innerHTML += `<i style="top: ${j * 10}px; left: ${i * 10}px"></i>`;
+    if (game.html.indexOf('pre') !== -1) {
+        let text = '';
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (!mas[i]) {
+                    mas[i] = [0, 0];
                 }
+                if (mas[i][j] === 1) {
+                    text += 'X';
+                } else {
+                    text += ' ';
+                }
+            }
+            text += '\n'
+        }
+        pre.innerText = text;
+    } else {
+        for (let i = 0; i < m; i++) {
+            if (!mas[i]) {
+                mas[i] = [0, 0];
+            }
+            for (let j = 0; j < n; j++) {
+                if (mas[i][j] === 1) {
+                    if (game.html.indexOf('canvas') !== -1) {
+                        game.ctx.fillRect(i*10, j*10, 10, 10);
+                    } else if (game.html.indexOf('svg') !== -1) {
+                        game.fieldType.innerHTML += `<rect x="${i * 10}" y="${j * 10}" width="10" height="10" fill="black"></rect>`;
+                    } else if (game.html.indexOf('div') !== -1) {
+                        game.fieldType.innerHTML += `<i style="top: ${j * 10}px; left: ${i * 10}px"></i>`;
+                    }
 
+                }
             }
         }
     }

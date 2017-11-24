@@ -10,6 +10,15 @@ header > a {
 	border: solid 1px black;
 }
 
+pre {
+	display: inline-block;
+	border: 3px solid black;
+}
+
+pre:hover {
+	cursor: pointer;
+}
+
 #canvas,
 #svg,
 #div {
