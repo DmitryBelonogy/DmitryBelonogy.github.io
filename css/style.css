@@ -37,7 +37,7 @@ canvas {
 
 button {
 	text-transform: uppercase;
-	font-size: 1.5em;
+	font-size: 1.2em;
 	border: none;
 	border-radius: 0.3em;
 	margin: 0.5em;
@@ -55,7 +55,7 @@ button {
 }
 
 #content {
-	width: 60%;
+	width: 70%;
 	padding: 2%;
 	float: left;
 	color: aliceblue;
@@ -63,7 +63,7 @@ button {
 }
 
 #navigation {
-	width: 350px;
+	width: 235px;
 	float: left;
 	margin-top: 10%;
 }

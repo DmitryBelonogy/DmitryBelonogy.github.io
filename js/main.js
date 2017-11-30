@@ -265,7 +265,7 @@ function addContent() {
                 break;
                 case 'bestPlayers':
                     document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = '<ul id="best10"><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li></ul>';
+                    document.getElementById('content').innerHTML = '<ul id="best10"><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li><li>Player X</li></ul>';
                     break;
                 case 'recordGame':
                     document.getElementById('content').innerHTML = '';
