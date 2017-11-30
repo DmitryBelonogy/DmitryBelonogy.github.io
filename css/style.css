@@ -41,31 +41,38 @@ button {
 	border: none;
 	border-radius: 0.3em;
 	margin: 0.5em;
+	margin-left: 0;
 	font-weight: bold;
 }
 
 #menuPanel {
+	overflow: auto;
 	visibility: hidden;
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 80vw;
+	width: 95vw;
 	height: 70vh;
 	background: rgba(0, 0, 0, .5);
 }
 
 #content {
-	width: 70%;
+	width: 845px;
 	padding: 2%;
+	padding-top: 0;
+	padding-bottom: 0;
 	float: left;
 	color: aliceblue;
 	font-size: 1.1em;
 }
 
 #navigation {
-	width: 235px;
+	padding: 2%;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-top: 10px;
+	width: 20%;
 	float: left;
-	margin-top: 10%;
 }
 
 #best10 {
