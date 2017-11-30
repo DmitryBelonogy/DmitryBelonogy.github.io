@@ -242,12 +242,11 @@ function showMenu() {
     menu.addEventListener('click', ()=> {
         paused = true;
         let menuPanel = document.getElementById('menuPanel');
-        if (menuPanel.style.right === '0px') {
-            menuPanel.style.right = '';
-        } else if (menuPanel.style.right === '') {
-            menuPanel.style.right = '0px';
+        if (menuPanel.style.visibility === '') {
+            menuPanel.style.visibility = 'visible';
+        } else if (menuPanel.style.visibility === 'visible') {
+            menuPanel.style.visibility = '';
         }
-        menuPanel.style.transition = `right 1s`;
     })
 }
 
@@ -262,7 +261,7 @@ function addContent() {
             switch(ev.target.id) {
                 case 'about':
                     document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span><span>Accusamus, at beatae dolorem, enim libero nihil quaerat, quam quis rem sapiente similique sunt vitae voluptatibus? Amet autem ea, harum libero minima nisi omnis, optio perspiciatis quia vel velit veritatis.</span><span>Consequatur delectus esse exercitationem nam praesentium repellat sed! Aperiam architecto, doloremque et fugiat in modi quas reprehenderit? Amet at dicta distinctio dolorum laboriosam necessitatibus, neque nesciunt nisi nulla rerum voluptatibus.</span><span>Accusamus assumenda dignissimos impedit in incidunt maxime, minus pariatur, quam, quasi repellat rerum soluta vitae? Blanditiis esse illo maxime porro reprehenderit sint sit? Ab accusamus dolores id ipsum officiis, veritatis.</span><span>Esse, exercitationem ipsum iste itaque obcaecati quae quaerat quo suscipit. A assumenda corporis cupiditate, earum magnam minima officiis recusandae similique sunt suscipit? Dolorem ea enim incidunt minima modi provident, unde?</span><span>Ab accusantium animi explicabo nisi omnis, vitae! Consequatur distinctio dolor doloremque dolores, eos error fugit illum magnam, minima minus mollitia nam numquam, odio perspiciatis quos repellendus soluta tenetur ullam vel?</span></p>';
+                    document.getElementById('content').innerHTML = '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span></p>';
                 break;
                 case 'bestPlayers':
                     document.getElementById('content').innerHTML = '';
