@@ -12,31 +12,53 @@ body {
 	text-decoration: none;
 }
 
-button {
+#controls {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 100px;
+	height: 100px;
+}
+
+#controls button {
+	position: absolute;
 	text-transform: uppercase;
 	font-size: 1.8em;
 	border: none;
-	border-radius: 0.3em;
+	border-radius: 100px;
 	margin: 0.5em;
 	font-weight: bold;
 }
 
-#menuPanel {
-	width: 100vw;
-	height: 100vh;
-	background: yellow;
+button#top {
+	width: 70px;
+	height: 35px;
+	clip-path: polygon(100% 0, 0 0, 50% 100%);
+	top: -5px;
+	left: 0;
 }
 
-#content {
-	width: 70%;
-	padding: 2%;
-	float: left;
-	background: red;
+button#right {
+	width: 35px;
+	height: 70px;
+	clip-path: polygon(100% 0, 100% 100%, 0 50%);
+	right: -5px;
+	top: 0;
 }
 
-#navigation {
-	width: 350px;
-	float: left;
-	margin-top: 10%;
+button#bot {
+	width: 70px;
+	height: 35px;
+	clip-path: polygon(0 100%, 100% 100%, 50% 0);
+	left: 0;
+	bottom: -5px;
+}
+
+button#left {
+	width: 35px;
+	height: 70px;
+	clip-path: polygon(0 100%, 0 0, 100% 50%);
+	left: -5px;
+	top: 0;
 }
 

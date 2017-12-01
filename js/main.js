@@ -8,7 +8,7 @@ class myGame {
     }
 
     init() {
-        myGame.addMenu();
+        myGame.addControlButton();
         this.canvas.width = document.documentElement.clientWidth;
         this.canvas.height = document.documentElement.clientHeight;
         this.context = this.canvas.getContext('2d');
@@ -22,8 +22,8 @@ class myGame {
         this.context.drawImage(this.img, 0, 0, this.canvas.width, this.canvas.height);
     }
 
-    static addMenu() {
-        document.getElementsByTagName('body')[0].innerHTML = '<div id="menuPanel"><div id="navigation"><ul><li><button id="about">About</button></li><li><button id="bestPlayers">Best palyers</button></li><li><button id="recordGame">Record last game</button></li></ul></div><div id="content"></div></div><div id="menu"><img src="img/settings.png" alt="menu"></div><div id="pause"><img src="img/pause.png" alt="pause"></div>';
+    static addControlButton() {
+        document.getElementsByTagName('body')[0].innerHTML = '<div id="menuPanel"><div id="navigation"><ul><li><button id="about">About</button></li><li><button id="bestPlayers">Best palyers</button></li><li><button id="recordGame">Record last game</button></li></ul></div><div id="content"></div></div><div id="menu"><img src="img/settings.png" alt="menu"></div><div id="pause"><img src="img/pause.png" alt="pause"></div><div id="controls"><button id="top"></button><button id="right"></button><button id="bot"></button><button id="left"></button></div>';
     }
 }
 
@@ -173,6 +173,26 @@ class Hero extends Component {
             this.keysdown[ev.keyCode] = true;
             this.changeDirection();
         });
+        document.getElementById('controls').addEventListener('touchstart', (ev)=> {
+            if (ev.target.tagName !== 'BUTTON') {
+                return false;
+            }
+            switch(ev.target.id) {
+                case 'top':
+                    this.keysdown[87] = true;
+                    break;
+                case 'right':
+                    this.keysdown[68] = true;
+                    break;
+                case 'bot':
+                    this.keysdown[83] = true;
+                    break;
+                case 'left':
+                    this.keysdown[65] = true;
+                    break;
+            }
+            this.changeDirection();
+        });
     }
 
     controlKeyUp() {
@@ -180,6 +200,26 @@ class Hero extends Component {
             this.keysdown[ev.keyCode] = false;
             this.changeDirection();
         });
+        document.getElementById('controls').addEventListener('touchend', (ev)=> {
+            if (ev.target.tagName !== 'BUTTON') {
+                return false;
+            }
+            switch(ev.target.id) {
+                case 'top':
+                    this.keysdown[87] = false;
+                break;
+                case 'right':
+                    this.keysdown[68] = false;
+                    break;
+                case 'bot':
+                    this.keysdown[83] = false;
+                    break;
+                case 'left':
+                    this.keysdown[65] = false;
+                    break;
+            }
+            this.changeDirection();
+        })
     }
 
     changeDirection() {
@@ -252,7 +292,12 @@ function showMenu() {
 
 showMenu();
 
-document.getElementById('content').innerHTML = '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span></p>';
+let contentMenu = {
+    about: '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span></p>',
+    bestPlayers: '<ul id="best10"><li>Player X 100000</li><li>Player X 152022</li><li>Player X 515000</li><li>Player X 51416515</li><li>Player X 15165161</li></ul>'
+};
+
+document.getElementById('content').innerHTML = contentMenu.about;
 
 function addContent() {
     let navigation = document.getElementById('navigation');
@@ -263,11 +308,11 @@ function addContent() {
             switch(ev.target.id) {
                 case 'about':
                     document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span></p>';
+                    document.getElementById('content').innerHTML = contentMenu.about;
                 break;
                 case 'bestPlayers':
                     document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = '<ul id="best10"><li>Player X 100000</li><li>Player X 152022</li><li>Player X 515000</li><li>Player X 51416515</li><li>Player X 15165161</li></ul>';
+                    document.getElementById('content').innerHTML = contentMenu.bestPlayers;
                     break;
                 case 'recordGame':
                     document.getElementById('content').innerHTML = '';
