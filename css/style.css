@@ -87,6 +87,7 @@ canvas {
 }
 
 #controls {
+	visibility: hidden;
 	position: absolute;
 	bottom: 20px;
 	left: 10px;
@@ -140,5 +141,9 @@ button#left {
 
 /*---------------media--------------------*/
 
-
+@media screen and (max-width: 1000px) {
+	#controls {
+		visibility: visible;
+	}
+}
 
