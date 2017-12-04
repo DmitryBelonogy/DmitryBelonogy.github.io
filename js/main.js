@@ -1,4 +1,18 @@
 let paused = false;
+let count = 0;
+let bestPlayersArr = localStorage.length !==0 ? JSON.parse(localStorage.getItem('best')): [];
+let enemiesArr = [];
+let recordGameArr = [{
+    width: 32,
+    height: 50,
+    src: 'img/hero.png',
+    frame: 9,
+    x: [],
+    y: [],
+    dx: [],
+    dy: []
+}];
+let tick = 0;
 
 class myGame {
     constructor() {
@@ -14,7 +28,7 @@ class myGame {
         this.context = this.canvas.getContext('2d');
         this.context.drawImage(this.img, 0, 0, this.canvas.width, this.canvas.height);
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-
+        setInterval(myGame.addCount, 1000);
     }
 
     clear() {
@@ -22,21 +36,26 @@ class myGame {
         this.context.drawImage(this.img, 0, 0, this.canvas.width, this.canvas.height);
     }
 
+    static addCount() {
+        if (paused) {
+            return false;
+        }
+        count++;
+        document.getElementById('count').innerText = count;
+    }
+
     static addControlButton() {
-        document.getElementsByTagName('body')[0].innerHTML = '<div id="menuPanel"><div id="navigation"><ul><li><button id="about">About</button></li><li><button id="bestPlayers">Best palyers</button></li><li><button id="recordGame">Record last game</button></li></ul></div><div id="content"></div></div><div id="menu"><img src="img/settings.png" alt="menu"></div><div id="pause"><img src="img/pause.png" alt="pause"></div><div id="controls"><button id="top"></button><button id="right"></button><button id="bot"></button><button id="left"></button></div>';
+        document.getElementsByTagName('body')[0].innerHTML = '<span id="count">0</span><div id="menuPanel"><div id="navigation"><ul><li><button id="about">About</button></li><li><button id="bestPlayers">Best palyers</button></li><li><a href="#record" id="recordGame">Record last game</a></li></ul></div><div id="content"></div></div><div id="menu"><img src="img/settings.png" alt="menu"></div><div id="pause"><img src="img/pause.png" alt="pause"></div><div id="controls"><button id="top"></button><button id="right"></button><button id="bot"></button><button id="left"></button></div>';
     }
 }
 
-let game = new myGame();
-game.init();
-
 class Component {
-    constructor(width, height, x, y, frame, src) {
+    constructor(width, height, frame, src) {
         this.ctx = game.context;
         this.width = width;
         this.height = height;
-        this.x = x;
-        this.y = y;
+        this.x = Math.random()*(50 - document.documentElement.clientWidth) + document.documentElement.clientWidth;
+        this.y = Math.random()*(50 - document.documentElement.clientHeight) + document.documentElement.clientHeight;
         this.dx = (Math.random()*2 - Math.random()*2)*2;
         this.dy = (Math.random()*2 - Math.random()*2)*2;
         this.frames = frame;
@@ -92,6 +111,53 @@ class Component {
     }
 }
 
+class RecordComponent {
+    constructor(width, height, src, frame, x, y, dx, dy) {
+        this.ctx = recordGame.context;
+        this.width = width;
+        this.height = height;
+        this.frames = frame;
+        this.image = new Image();
+        this.image.src = src;
+        this.currentFrame = 0;
+        this.currentIndex = 0;
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+    }
+
+    action() {
+        this.drawImg();
+    }
+
+    drawImg() {
+
+        if (this.dx === 0 && this.dy === 0) {
+            this.ctx.drawImage(this.image, 0, this.height * this.currentIndex, this.width, this.height, this.x, this.y, this.width, this.height);
+            return;
+        }
+
+        if (this.dx === 0 && this.dy > 0) {
+            this.currentIndex = 0;
+        } else if ((this.dx < 0 && this.dy <= 0) || (this.dx < 0 && this.dy > 0)) {
+            this.currentIndex = 1;
+        } else if (this.dx === 0 && this.dy < 0) {
+            this.currentIndex = 2;
+        } else if ((this.dx > 0 && this.dy <= 0) || (this.dx > 0 && this.dy > 0)) {
+            this.currentIndex = 3;
+        }
+
+        this.ctx.drawImage(this.image, this.width * this.currentFrame, this.height * this.currentIndex, this.width, this.height, this.x, this.y, this.width, this.height);
+
+        if (this.currentFrame === this.frames - 1) {
+            this.currentFrame = 0;
+        } else {
+            this.currentFrame++;
+        }
+    }
+}
+
 class Enemy extends Component {
 
     action() {
@@ -108,14 +174,33 @@ class Enemy extends Component {
 
         if (XColl && YColl) {
             clearInterval(interval);
-            alert('Game Over');
+            paused = true;
+            let name = prompt('Your name', 'name') || 'no name';
+            let player = {
+                name: `${name}`,
+                count: count
+            };
+            bestPlayersArr.push(player);
+            function compareNumeric(a, b) {
+                if (a.count > b.count) return -1;
+                if (a.count < b.count) return 1;
+            }
+            bestPlayersArr.sort(compareNumeric);
+            if (bestPlayersArr.length > 10) {
+                bestPlayersArr.length = 10;
+            }
+            localStorage.setItem('best', JSON.stringify(bestPlayersArr));
+            let newGame = confirm('Start new game?');
+            if (newGame) {
+                location.reload();
+            }
         }
     }
 }
 
 class SmartEnemy extends Enemy{
-    constructor(width, height, x, y, frame, src, radius) {
-        super(width, height, x, y, frame, src);
+    constructor(width, height, frame, src, radius) {
+        super(width, height, frame, src);
         this.radius = radius;
     }
 
@@ -149,8 +234,10 @@ class SmartEnemy extends Enemy{
 }
 
 class Hero extends Component {
-    constructor(width, height, x, y, frame, src) {
-        super(width, height, x, y, frame, src);
+    constructor(width, height, frame, src) {
+        super(width, height, frame, src);
+        this.x = document.documentElement.clientWidth / 2.1;
+        this.y = document.documentElement.clientHeight / 2.1;
         this.dx = 0;
         this.dy = 0;
         this.keysdown = {
@@ -240,27 +327,56 @@ class Hero extends Component {
     }
 }
 
-let hero = new Hero(32, 50, 200, 200, 9, 'img/hero.png' );
+let game = new myGame();
+game.init();
 
-let enemy1 = new Enemy(25, 45, Math.random()*(20 - 480) + 480, Math.random()*(20 - 480) + 480, 9, 'img/ghost.png');
-let enemy2 = new Enemy(25, 45, Math.random()*(20 - 4800) + 480, Math.random()*(20 - 480) + 480, 9, 'img/ghost.png');
-let enemy3 = new Enemy(25, 45, Math.random()*(20 - 480) + 480, Math.random()*(20 - 480) + 480, 9, 'img/ghost.png');
+let hero = new Hero(32, 50, 9, 'img/hero.png' );
 
-let smartEnemy1 = new SmartEnemy(25, 20, Math.random()*(20 - 480) + 480, Math.random()*(20 - 480) + 480, 9, 'img/bat.png', 100);
-let smartEnemy2 = new SmartEnemy(25, 20, Math.random()*(20 - 480) + 480, Math.random()*(20 - 480) + 480, 9, 'img/bat.png', 100);
-let smartEnemy3 = new SmartEnemy(25, 20, Math.random()*(20 - 480) + 480, Math.random()*(20 - 480) + 480, 9, 'img/bat.png', 100);
+setInterval( ()=> {
+    if (paused) {
+        return false;
+    }
+
+    if (count % 5 === 0) {
+        console.log('enemy');
+        enemiesArr.push(new Enemy(25, 45, 9, 'img/ghost.png'));
+        recordGameArr.push({
+            width: 25,
+            height: 45,
+            src: 'img/ghost.png',
+            frame: 9,
+            x: [],
+            y: [],
+            dx: [],
+            dy: []
+        });
+    }
+
+    if (count % 10 === 0) {
+        console.log('smartEnemy');
+        enemiesArr.push(new SmartEnemy(25, 20, 9, 'img/bat.png', 100));
+        recordGameArr.push({
+            width: 25,
+            height: 20,
+            src: 'img/bat.png',
+            frame: 9,
+            x: [],
+            y: [],
+            dx: [],
+            dy: []
+        });
+    }
+},1000);
 
 let interval = setInterval(function() {
     if (paused) {
         return false;
     }
     game.clear();
-    enemy1.action();
-    enemy2.action();
-    enemy3.action();
-    smartEnemy1.action();
-    smartEnemy2.action();
-    smartEnemy3.action();
+
+    for (let i = 0; i < enemiesArr.length; i++) {
+        enemiesArr[i].action();
+    }
     hero.action();
 }, 20);
 
@@ -292,12 +408,9 @@ function showMenu() {
 
 showMenu();
 
-let contentMenu = {
-    about: '<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, dolorem eos eveniet illo ipsam iure perspiciatis placeat quidem soluta vitae. Architecto dicta error fuga ipsa iusto laudantium, neque odit similique?</span><span>Accusantium debitis dicta dolores doloribus esse facere laudantium maxime modi porro quae quasi sint tempore, veritatis! Deserunt distinctio eos quaerat quo? Architecto at deleniti molestiae molestias quaerat quam sint veniam.</span><span>A amet animi cupiditate dolor dolorem ea fuga illum impedit inventore ipsam iste laboriosam molestias neque nesciunt nihil odit officia perferendis quod, ratione recusandae reiciendis repellat, tempora ullam ut, voluptates.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span><span>Aut laborum modi nobis voluptatibus! Ab autem consectetur enim illo, ipsum iure molestias sunt ullam vel voluptatum! Earum, iste numquam optio placeat quam soluta. Eos itaque minus reprehenderit voluptas voluptates.</span><span>Alias consectetur dolores hic mollitia nesciunt qui, veniam vero. Blanditiis ducimus esse explicabo facere harum incidunt, iusto nisi nobis odio optio, pariatur quas qui quisquam reiciendis saepe soluta veniam! Unde.</span></p>',
-    bestPlayers: '<ul id="best10"><li>Player X 100000</li><li>Player X 152022</li><li>Player X 515000</li><li>Player X 51416515</li><li>Player X 15165161</li></ul>'
-};
+let content = document.getElementById('content');
 
-document.getElementById('content').innerHTML = contentMenu.about;
+content.innerHTML = '<div id="intro"><p>It was a bad idea to go through the cemetery at night. With every second of the enemies become more and more. How long can I hold out? ....</p><p>Every 5 seconds a new ghost appears, every 10 seconds - a new bat.</p><p>Hero controlled by keyboard keys <img src="img/wasd.png" alt="controls"> or control buttons (for sensory devices).</p></div>';
 
 function addContent() {
     let navigation = document.getElementById('navigation');
@@ -307,23 +420,51 @@ function addContent() {
         } else {
             switch(ev.target.id) {
                 case 'about':
-                    document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = contentMenu.about;
+                    content.innerHTML = '';
+                    content.innerHTML = '<div id="intro"><p>It was a bad idea to go through the cemetery at night. With every second of the enemies become more and more. How long can I hold out? ....</p><p>Every 5 seconds a new ghost appears, every 10 seconds - a new bat.</p><p>Hero controlled by keyboard keys <img src="img/wasd.png" alt="controls"> or control buttons (for sensory devices).</p></div>';
                 break;
                 case 'bestPlayers':
-                    document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = contentMenu.bestPlayers;
-                    break;
-                case 'recordGame':
-                    document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').innerHTML = 'recordGame';
+                    content.innerHTML = '';
+                    addListPlayers();
                     break;
             }
         }
     })
 }
 
+function addListPlayers() {
+    let data = JSON.parse(localStorage.getItem('best'));
+    let playerList = document.createElement('ul');
+    let ulContent = ``;
+    playerList.id = 'best10';
+    content.appendChild(playerList);
+    for (let i = 0; i < data.length; i++) {
+        ulContent += `<li>${data[i].name}<span>${data[i].count}</span></li>`;
+    }
+    playerList.innerHTML = ulContent;
+}
+
 addContent();
+
+function recordingGame() {
+    setInterval(()=> {
+        if (paused) {
+            return false;
+        }
+        recordGameArr[0].x.push(hero.x);
+        recordGameArr[0].y.push(hero.y);
+        recordGameArr[0].dx.push(hero.dx);
+        recordGameArr[0].dy.push(hero.dy);
+        for (let i = 0; i < enemiesArr.length; i++) {
+            recordGameArr[i+1].x.push(enemiesArr[i].x);
+            recordGameArr[i+1].y.push(enemiesArr[i].y);
+            recordGameArr[i+1].dx.push(enemiesArr[i].dx);
+            recordGameArr[i+1].dy.push(enemiesArr[i].dy);
+        }
+    }, 20);
+}
+
+recordingGame();
 
 
 

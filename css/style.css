@@ -70,7 +70,8 @@ canvas {
 	float: left;
 }
 
-#navigation button {
+#navigation button,
+#navigation a {
 	text-transform: uppercase;
 	font-size: 1.2em;
 	border: none;
@@ -78,12 +79,47 @@ canvas {
 	margin: 0.5em;
 	margin-left: 0;
 	font-weight: bold;
+	background: whitesmoke;
+}
+
+#navigation a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 5px;
+	color: #000;
+	font-family: Arial;
+	text-align: left;
 }
 
 #best10 {
 	font-size: 1.5em;
 	margin-left: 5%;
 	margin-top: 10%;
+}
+
+#best10 li {
+	position: relative;
+}
+
+#best10 li span {
+	position: absolute;
+	right: 0;
+}
+
+#intro {
+	font-size: 20px;
+	color: aliceblue;
+	font-weight: 700;
+}
+
+#intro p {
+	line-height: 20px;
+	vertical-align: middle;
+}
+
+#intro img {
+	vertical-align: middle;
+	width: 100px;
 }
 
 #controls {
@@ -137,6 +173,15 @@ button#left {
 	clip-path: polygon(0 100%, 0 0, 100% 50%);
 	left: -5px;
 	top: 0;
+}
+
+#count {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	font-size: 80px;
+	font-weight: bold;
+	color: darkred;
 }
 
 /*---------------media--------------------*/

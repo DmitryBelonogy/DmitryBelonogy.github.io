@@ -1,0 +1,32 @@
+html { overflow:  hidden; }
+
+ul, li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	background: dimgray;
+}
+
+#intro {
+	font-size: 20px;
+	color: aliceblue;
+	font-weight: 700;
+}
+
+intro p {
+	line-height: 120px;
+	vertical-align: middle;
+}
+
+#intro img {
+	vertical-align: middle;
+	width: 100px;
+}
+
+
