@@ -39,6 +39,12 @@ canvas {
 	right: 5px;
 }
 
+#back {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
 #menuPanel {
 	overflow: auto;
 	visibility: hidden;

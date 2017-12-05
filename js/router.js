@@ -1,10 +1,21 @@
 let routs = [
     {
-        name: 'game',
-        match: 'game',
+        name: '',
+        match: '',
         onEnter: () => {
-            // let game = new myGame();
-            // game.init();
+            document.getElementsByTagName('body')[0].innerHTML = '';
+            tick = 0;
+            recordGameArr = [{
+                width: 32,
+                height: 50,
+                src: 'img/hero.png',
+                frame: 9,
+                x: [],
+                y: [],
+                dx: [],
+                dy: []
+            }];
+            START();
         }
     },
     {
@@ -12,6 +23,8 @@ let routs = [
         match: 'record',
         onEnter: () => {
             document.getElementsByTagName('body')[0].innerHTML = '';
+            tick = 0;
+            RECORD();
         }
     }
 ];
@@ -21,20 +34,25 @@ function Router(routs) {
     //обработчик URL
     function handleUrl(url) {
 
-        let curentURL = url;
-        if(!curentURL.includes('#')) {
-            curentURL += '#game';
-            window.location.href += '#game';
-        }
+        // let curentURL = url;
+        // if(!curentURL.includes('#')) {
+        //     curentURL += '#game';
+        //     window.location.href += '#game';
+        // }
 
-        curentRout = findRout(curentURL);
+        let curentRout = findRout(url);
 
         curentRout.onEnter();
 
     }
 
     function findRout(url) {
-        url = url.split('#').pop();
+        if (!url.includes('#')) {
+            url = '';
+        } else {
+            url = url.split('#').pop();
+        }
+        console.log(url);
         return routs.find((rout) => {
             if (typeof rout.match === 'string') {
                 return rout.match === url;
@@ -61,8 +79,7 @@ function Router(routs) {
         }
         ev.preventDefault();
         // При клике по ссылке - обновлять URL
-        url = ev.target.getAttribute('href');
-        window.location.hash = url;
+        window.location.hash = ev.target.getAttribute('href');
     });
 }
 
