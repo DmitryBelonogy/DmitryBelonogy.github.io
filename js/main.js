@@ -11,6 +11,7 @@ let recordGameArr = [{
 let tick = 0;
 let bestPlayersArr;
 let duration;
+let componentArr = [];
 if (localStorage.getItem('best')) {
     bestPlayersArr = JSON.parse(localStorage.getItem('best'));
 } else {
@@ -435,6 +436,7 @@ function START() {
  */
 function RECORD() {
     let recordInterval;
+    // let componentArr = [];
 
     if (!localStorage.getItem('record')) {
         alert('Record game does not exist');
@@ -477,7 +479,7 @@ function RECORD() {
     let gameRecord = new myGame();
 
     class RecordComponent {
-        constructor(width, height, src, frame, x, y, dx, dy) {
+        constructor(width, height, src, frame, x, y) {
             this.ctx = gameRecord.context;
             this.width = width;
             this.height = height;
@@ -488,42 +490,37 @@ function RECORD() {
             this.currentIndex = 0;
             this.x = x;
             this.y = y;
-            this.dx = dx;
-            this.dy = dy;
         }
 
-        action() {
-            this.x += this.dx;
-            this.y += this.dy;
-            if (this.x >= gameRecord.canvas.width) {
-                this.x = 1;
-            }
-            if (this.y >= gameRecord.canvas.height) {
-                this.y = 1;
-            }
-            if (this.x <= 0) {
-                this.x = gameRecord.canvas.width;
-            }
-            if (this.y <= 0) {
-                this.y = gameRecord.canvas.height;
-            }
-            this.drawImg();
-        }
-
-        drawImg() {
-
-            if (this.dx === 0 && this.dy === 0) {
+        action(parameters) {
+            let {x, y, dx, dy} = parameters;
+            this.x = x;
+            this.y = y;
+            // if (this.x >= gameRecord.canvas.width) {
+            //     this.x = 1;
+            // }
+            // if (this.y >= gameRecord.canvas.height) {
+            //     this.y = 1;
+            // }
+            // if (this.x <= 0) {
+            //     this.x = gameRecord.canvas.width;
+            // }
+            // if (this.y <= 0) {
+            //     this.y = gameRecord.canvas.height;
+            // }
+            // this.drawImg(dx, dy);
+            if (dx === 0 && dy === 0) {
                 this.ctx.drawImage(this.image, 0, this.height * this.currentIndex, this.width, this.height, this.x, this.y, this.width, this.height);
                 return;
             }
 
-            if (this.dx === 0 && this.dy > 0) {
+            if (dx === 0 && dy > 0) {
                 this.currentIndex = 0;
-            } else if ((this.dx < 0 && this.dy <= 0) || (this.dx < 0 && this.dy > 0)) {
+            } else if ((dx < 0 && dy <= 0) || (dx < 0 && dy > 0)) {
                 this.currentIndex = 1;
-            } else if (this.dx === 0 && this.dy < 0) {
+            } else if (dx === 0 && dy < 0) {
                 this.currentIndex = 2;
-            } else if ((this.dx > 0 && this.dy <= 0) || (this.dx > 0 && this.dy > 0)) {
+            } else if ((dx > 0 && dy <= 0) || (dx > 0 && dy > 0)) {
                 this.currentIndex = 3;
             }
 
@@ -535,9 +532,35 @@ function RECORD() {
                 this.currentFrame++;
             }
         }
+
+        // drawImg(parameters) {
+        //
+            // if (dx === 0 && dy === 0) {
+            //     this.ctx.drawImage(this.image, 0, this.height * this.currentIndex, this.width, this.height, this.x, this.y, this.width, this.height);
+            //     return;
+            // }
+            //
+            // if (dx === 0 && dy > 0) {
+            //     this.currentIndex = 0;
+            // } else if ((dx < 0 && dy <= 0) || (dx < 0 && dy > 0)) {
+            //     this.currentIndex = 1;
+            // } else if (dx === 0 && dy < 0) {
+            //     this.currentIndex = 2;
+            // } else if ((dx > 0 && dy <= 0) || (dx > 0 && dy > 0)) {
+            //     this.currentIndex = 3;
+            // }
+            //
+            // this.ctx.drawImage(this.image, this.width * this.currentFrame, this.height * this.currentIndex, this.width, this.height, this.x, this.y, this.width, this.height);
+            //
+            // if (this.currentFrame === this.frames - 1) {
+            //     this.currentFrame = 0;
+            // } else {
+            //     this.currentFrame++;
+            // }
+        // }
     }
 
-    for (let i = 1; i < recordGameArr.length; i++) {
+    for (let i = 0; i < recordGameArr.length; i++) {
         console.log('ok');
         let arr = [];
         let xLength = recordGameArr[i].x.length;
@@ -546,6 +569,13 @@ function RECORD() {
         recordGameArr[i].y = arr.concat(recordGameArr[i].y);
         recordGameArr[i].dx = arr.concat(recordGameArr[i].dx);
         recordGameArr[i].dy = arr.concat(recordGameArr[i].dy);
+        let width = recordGameArr[i].width;
+        let height = recordGameArr[i].height;
+        let src = recordGameArr[i].src;
+        let frame = recordGameArr[i].frame;
+        let x = recordGameArr[i].x[0];
+        let y = recordGameArr[i].y[0];
+        componentArr.push(new RecordComponent(width, height, src, frame, x, y));
     }
 
     recordInterval = setInterval(() => {
@@ -555,16 +585,16 @@ function RECORD() {
         }
         gameRecord.clear();
         for (let i = 0; i < recordGameArr.length; i++) {
-            let width = recordGameArr[i].width;
-            let height = recordGameArr[i].height;
-            let src = recordGameArr[i].src;
-            let frame = recordGameArr[i].frame;
+            // let width = recordGameArr[i].width;
+            // let height = recordGameArr[i].height;
+            // let src = recordGameArr[i].src;
+            // let frame = recordGameArr[i].frame;
             let x = recordGameArr[i].x[tick];
             let y = recordGameArr[i].y[tick];
             let dx = recordGameArr[i].dx[tick];
             let dy = recordGameArr[i].dy[tick];
-            let component = new RecordComponent(width, height, src, frame, x, y, dx, dy);
-            component.action();
+
+            componentArr[i].action({x: x, y: y, dx: dx, dy: dy});
         }
         tick++;
     }, 30);
