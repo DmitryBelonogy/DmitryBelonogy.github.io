@@ -1,0 +1,109 @@
+.figure {
+  width: 60px;
+  height: 60px;
+  -webkit-clip-path: polygon(50% 0, 90% 20%, 100% 100%, 0 100%, 10% 20%);
+  clip-path: polygon(50% 0, 90% 20%, 100% 100%, 0 100%, 10% 20%);
+  margin-top: 4px;
+  background: url(../../img/figure.jpg);
+  text-align: center;
+}
+
+.P {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: 5px 5px;
+}
+
+.L {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -44px 10px;
+}
+
+.H {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -94px 10px;
+}
+
+.S {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -144px 10px;
+}
+
+.G {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -195px 10px;
+}
+
+.K {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -244px 10px;
+}
+
+.K {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -244px 10px;
+}
+
+.R {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -295px 10px;
+}
+
+.B {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -344px 12px;
+}
+
+.R {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -295px 10px;
+}
+
+.TB {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -395px 12px;
+}
+
+.TR {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -446px 8px;
+}
+
+.TP,
+.TL,
+.TH,
+.TS {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/figures.png) no-repeat;
+  background-position: -495px 8px;
+}
+
+
+
+.figure.enemy {
+  transform: rotate(180deg);
+}

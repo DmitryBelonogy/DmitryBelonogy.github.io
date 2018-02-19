@@ -1,0 +1,10 @@
+.turnIndicate {
+  position: absolute;
+  padding: 20px;
+  top: 25px;
+  left: 130px;
+  align-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
